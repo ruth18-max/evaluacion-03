@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Promedio Final del Curso</title>
+<link rel="stylesheet" href="eva.css">
+<script>
+function calcularPromedio() {
+    const practica01 = parseFloat(document.getElementById("practica01").value);
+    const practica02 = parseFloat(document.getElementById("practica02").value);
+    const practica03 = parseFloat(document.getElementById("practica03").value);
+    const examen = parseFloat(document.getElementById("examen").value);
+
+    
+    if (isNaN(practica01) || isNaN(practica02) || isNaN(practica03) || isNaN(examen)) {
+        alert("Ingresa valores numéricos válidos.");
+        return;
+    }
+
+    if (practica01 < 0 || practica01 > 20 || practica02 < 0 || practica02 > 20 || practica03 < 0 || practica03 > 20 || examen < 0 || examen > 20) {
+        alert("Las notas deben estar entre 0 y 20.");
+        return;
+    }
+
+    
+    const promedioPP = (practica01 + practica02 + practica03) / 3;
+
+    
+    const promedioFinal = (promedioPP + examen) / 2;
+
+    
+    document.getElementById("promedioPP").value = promedioPP.toFixed(2);
+    document.getElementById("promedioFinal").value = promedioFinal.toFixed(2);
+
+   
+    const resultado = promedioFinal >= 13 ? "Aprobado" : "Desaprobado";
+    document.getElementById("resultado").textContent = resultado;
+    document.getElementById("resultado").classList.add(resultado === "Aprobado" ? "aprobado" : "desaprobado");
+}
+
+function limpiarCampos() {
+    document.getElementById("practica01").value = "";
+    document.getElementById("practica02").value = "";
+    document.getElementById("practica03").value = "";
+    document.getElementById("examen").value = "";
+    document.getElementById("promedioPP").value = "";
+    document.getElementById("promedioFinal").value = "";
+    document.getElementById("resultado").textContent = "";
+    document.getElementById("resultado").classList.remove("aprobado", "desaprobado");
+}
+
+function cerrarPagina() {
+    window.close(); 
+}
+</script>
+</head>
+<body>
+
+<div class="container">
+    <img src="img/banner-tecnologia.jpg" alt="Banner Tecnología">
+    <h1>PROMEDIO FINAL DEL CURSO </h1>
+    <button class="cerrar" onclick="cerrarPagina()">Cerrar</button>
+    <br>
+
+
+    <label for="practica01">Práctica 01:</label>
+    <input type="number" id="practica01" min="0" max="20">
+    <br>
+
+    <label for="practica02">Práctica 02:</label>
+    <input type="number" id="practica02" min="0" max="20">
+    <br>
+
+    <label for="practica03">Práctica 03:</label>
+    <input type="number" id="practica03" min="0" max="20">
+    <br>
+
+    <label for="promedioPP">Promedio PP:</label>
+    <input style="background-color: #49eb5f8a;" type="text" id="promedioPP" disabled>
+    <br>
+
+    <label for="examen">Examen:</label>
+    <input type="number" id="examen" min="0" max="20">
+    <br>
+
+    <label for="promedioFinal">Promedio Final:</label>
+    <input style="background-color: #49eb5f8a;"type="text" id="promedioFinal" disabled>
+    <br>
+
+    <div id="resultado"></div>
+    <br>
+    <button onclick="calcularPromedio()">Calcular</button>
+    <button onclick="limpiarCampos()">Limpiar</button>
+    <button onclick="window.print()">Imprimir</button>
+</div>
+<footer>
+    <p style="color: #333; font-size: 20px ; margin:0 auto;">Autor: Luisa Ruth Gomez Gomez</p>
+</footer>
+
+</body>
+</html>
